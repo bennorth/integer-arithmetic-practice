@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const answerInput = document.getElementById('answer-input');
     const feedbackDiv = document.getElementById('feedback');
     const feedbackMessage = document.getElementById('feedback-message');
-    const correctAnswerDiv = document.getElementById('correct-answer');
-    const answerValue = document.getElementById('answer-value');
     const dismissButton = document.getElementById('dismiss-feedback');
     const num1Span = document.getElementById('num1');
     const num2Span = document.getElementById('num2');
@@ -17,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let total = 0;
     let currentAnswer = 0;
     let isNegative = false;
+    let currentProblem = { num1: 0, num2: 0, operator: '+' };
 
     function generateProblem() {
         const num1 = Math.floor(Math.random() * 41) - 20; // -20 to 20
@@ -33,10 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
             answer = num1 * num2;
         }
 
+        // Store current problem
+        currentProblem = { num1, num2, operator };
+
+        // Display problem
+        displayProblem(num1, num2, operator);
+        currentAnswer = answer;
+    }
+
+    function displayProblem(num1, num2, operator) {
         num1Span.textContent = num1;
         num2Span.textContent = num2;
         operatorSpan.textContent = operator;
-        currentAnswer = answer;
     }
 
     function showFeedback(correct) {
@@ -45,11 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
         feedbackDiv.classList.remove('d-none');
 
         if (!correct) {
-            correctAnswerDiv.classList.remove('d-none');
-            answerValue.textContent = currentAnswer;
+            // Show the correct answer in place of the problem
+            num1Span.textContent = currentAnswer;
+            num2Span.textContent = '';
+            operatorSpan.textContent = '=';
             dismissButton.classList.remove('d-none');
         } else {
-            correctAnswerDiv.classList.add('d-none');
             dismissButton.classList.add('d-none');
             // For correct answers, automatically generate new problem after brief delay
             setTimeout(() => {
@@ -105,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
             feedbackMessage.textContent = 'Please enter a valid number';
             feedbackDiv.className = 'alert alert-danger';
             feedbackDiv.classList.remove('d-none');
-            correctAnswerDiv.classList.add('d-none');
             dismissButton.classList.add('d-none');
             return;
         }
@@ -122,6 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     dismissButton.addEventListener('click', function() {
         feedbackDiv.classList.add('d-none');
+        // Restore the original problem display before generating a new one
+        displayProblem(currentProblem.num1, currentProblem.num2, currentProblem.operator);
         generateProblem();
         answerInput.focus();
     });
