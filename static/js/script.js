@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const answerForm = document.getElementById('answer-form');
     const answerInput = document.getElementById('answer-input');
     const feedbackDiv = document.getElementById('feedback');
+    const feedbackMessage = document.getElementById('feedback-message');
+    const correctAnswerDiv = document.getElementById('correct-answer');
+    const answerValue = document.getElementById('answer-value');
+    const dismissButton = document.getElementById('dismiss-feedback');
     const num1Span = document.getElementById('num1');
     const num2Span = document.getElementById('num2');
     const operatorSpan = document.getElementById('operator');
@@ -34,13 +38,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showFeedback(correct) {
-        feedbackDiv.className = `alert ${correct ? 'alert-success' : 'alert-danger'} feedback-animation`;
-        feedbackDiv.textContent = correct ? 'Correct! 🎉' : 'Try again! 💪';
+        feedbackDiv.className = `alert ${correct ? 'alert-success' : 'alert-danger'}`;
+        feedbackMessage.textContent = correct ? 'Correct! 🎉' : 'Try again! 💪';
         feedbackDiv.classList.remove('d-none');
 
-        setTimeout(() => {
-            feedbackDiv.classList.add('d-none');
-        }, 2000);
+        if (!correct) {
+            correctAnswerDiv.classList.remove('d-none');
+            answerValue.textContent = currentAnswer;
+            dismissButton.classList.remove('d-none');
+        } else {
+            correctAnswerDiv.classList.add('d-none');
+            dismissButton.classList.add('d-none');
+            // For correct answers, automatically generate new problem after brief delay
+            setTimeout(() => {
+                feedbackDiv.classList.add('d-none');
+                generateProblem();
+            }, 1500);
+        }
     }
 
     function updateScore(correct) {
@@ -57,9 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const userAnswer = parseInt(answerInput.value);
         if (isNaN(userAnswer)) {
-            feedbackDiv.className = 'alert alert-danger feedback-animation';
-            feedbackDiv.textContent = 'Please enter a valid number';
+            feedbackMessage.textContent = 'Please enter a valid number';
+            feedbackDiv.className = 'alert alert-danger';
             feedbackDiv.classList.remove('d-none');
+            correctAnswerDiv.classList.add('d-none');
+            dismissButton.classList.add('d-none');
             return;
         }
 
@@ -67,7 +83,16 @@ document.addEventListener('DOMContentLoaded', function() {
         showFeedback(correct);
         updateScore(correct);
         answerInput.value = '';
+
+        if (correct) {
+            answerInput.focus();
+        }
+    });
+
+    dismissButton.addEventListener('click', function() {
+        feedbackDiv.classList.add('d-none');
         generateProblem();
+        answerInput.focus();
     });
 
     // Initialize the first problem

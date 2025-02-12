@@ -33,7 +33,15 @@
                     </div>
                 </form>
 
-                <div id="feedback" class="alert d-none text-center" role="alert"></div>
+                <div id="feedback" class="alert d-none text-center" role="alert">
+                    <div id="feedback-message" class="mb-3"></div>
+                    <div id="correct-answer" class="mb-3 d-none">
+                        <strong>The correct answer was: <span id="answer-value"></span></strong>
+                    </div>
+                    <button id="dismiss-feedback" class="btn btn-secondary d-none">
+                        Next Problem
+                    </button>
+                </div>
             </div>
         </div>
     </div>
