@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let score = 0;
     let total = 0;
     let currentAnswer = 0;
-    let isNegative = false;
     let currentProblem = { num1: 0, num2: 0, operator: '+' };
 
     function generateProblem() {
@@ -97,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (value === 'clear') {
                 // Clear the input
                 answerInput.value = '';
-                isNegative = false;
             } else {
                 // Add number or minus sign as a character
                 answerInput.value += value;
