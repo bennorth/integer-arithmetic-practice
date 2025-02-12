@@ -52,10 +52,29 @@ document.addEventListener('DOMContentLoaded', function() {
         feedbackDiv.classList.remove('d-none');
 
         if (!correct) {
-            // Show the correct answer in place of the problem
-            num1Span.textContent = currentAnswer;
-            num2Span.textContent = '';
-            operatorSpan.textContent = '=';
+            // Keep the original problem and add the correct answer
+            num2Span.textContent = currentProblem.num2;
+            operatorSpan.textContent = currentProblem.operator;
+            // Add equals sign and correct answer after the problem
+            const equalsSpan = document.createElement('span');
+            equalsSpan.className = 'problem-operator';
+            equalsSpan.textContent = '=';
+            const answerSpan = document.createElement('span');
+            answerSpan.className = 'problem-number';
+            answerSpan.textContent = currentAnswer;
+
+            // Clear any previous answer display
+            const problemContainer = num1Span.parentElement;
+            const existingEquals = problemContainer.querySelector('.equals-sign');
+            const existingAnswer = problemContainer.querySelector('.answer');
+            if (existingEquals) existingEquals.remove();
+            if (existingAnswer) existingAnswer.remove();
+
+            equalsSpan.classList.add('equals-sign');
+            answerSpan.classList.add('answer');
+            problemContainer.appendChild(equalsSpan);
+            problemContainer.appendChild(answerSpan);
+
             dismissButton.classList.remove('d-none');
         } else {
             dismissButton.classList.add('d-none');
@@ -129,8 +148,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     dismissButton.addEventListener('click', function() {
         feedbackDiv.classList.add('d-none');
-        // Restore the original problem display before generating a new one
-        displayProblem(currentProblem.num1, currentProblem.num2, currentProblem.operator);
+        // Clear the equals sign and answer spans
+        const problemContainer = num1Span.parentElement;
+        const existingEquals = problemContainer.querySelector('.equals-sign');
+        const existingAnswer = problemContainer.querySelector('.answer');
+        if (existingEquals) existingEquals.remove();
+        if (existingAnswer) existingAnswer.remove();
+        // Generate new problem
         generateProblem();
         answerInput.focus();
     });
