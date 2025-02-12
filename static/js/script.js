@@ -53,26 +53,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!correct) {
             // Keep the original problem and add the correct answer
-            num2Span.textContent = currentProblem.num2;
-            operatorSpan.textContent = currentProblem.operator;
-            // Add equals sign and correct answer after the problem
-            const equalsSpan = document.createElement('span');
-            equalsSpan.className = 'problem-operator';
-            equalsSpan.textContent = '=';
-            const answerSpan = document.createElement('span');
-            answerSpan.className = 'problem-number';
-            answerSpan.textContent = currentAnswer;
-
-            // Clear any previous answer display
             const problemContainer = num1Span.parentElement;
-            const existingEquals = problemContainer.querySelector('.equals-sign');
+
+            // Remove any existing answer display
             const existingAnswer = problemContainer.querySelector('.answer');
-            if (existingEquals) existingEquals.remove();
             if (existingAnswer) existingAnswer.remove();
 
-            equalsSpan.classList.add('equals-sign');
-            answerSpan.classList.add('answer');
-            problemContainer.appendChild(equalsSpan);
+            // Add correct answer after the existing equals sign
+            const answerSpan = document.createElement('span');
+            answerSpan.className = 'problem-number answer';
+            answerSpan.textContent = currentAnswer;
             problemContainer.appendChild(answerSpan);
 
             dismissButton.classList.remove('d-none');
@@ -150,9 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
         feedbackDiv.classList.add('d-none');
         // Clear the equals sign and answer spans
         const problemContainer = num1Span.parentElement;
-        const existingEquals = problemContainer.querySelector('.equals-sign');
         const existingAnswer = problemContainer.querySelector('.answer');
-        if (existingEquals) existingEquals.remove();
         if (existingAnswer) existingAnswer.remove();
         // Generate new problem
         generateProblem();
