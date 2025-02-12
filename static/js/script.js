@@ -98,15 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Clear the input
                 answerInput.value = '';
                 isNegative = false;
-            } else if (value === '-') {
-                // Toggle negative sign
-                if (answerInput.value.startsWith('-')) {
-                    answerInput.value = answerInput.value.substring(1);
-                } else {
-                    answerInput.value = '-' + answerInput.value;
-                }
             } else {
-                // Add number
+                // Add number or minus sign as a character
                 answerInput.value += value;
             }
 
