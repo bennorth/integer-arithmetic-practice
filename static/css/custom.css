@@ -1,0 +1,43 @@
+/* Problem display styling */
+.problem-container {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 2rem 0;
+}
+
+.problem-number {
+    padding: 0.5rem;
+}
+
+.problem-operator {
+    padding: 0 1rem;
+}
+
+/* Score display styling */
+.score-display {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+
+/* Feedback animations */
+.feedback-animation {
+    animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 576px) {
+    .problem-container {
+        font-size: 2rem;
+    }
+    
+    .problem-operator {
+        padding: 0 0.5rem;
+    }
+}

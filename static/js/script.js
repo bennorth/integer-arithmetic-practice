@@ -1,113 +1,63 @@
-class MathPractice {
-    constructor() {
-        this.score = 0;
-        this.attempts = 0;
-        this.currentProblem = null;
-        this.operators = {
-            '+': (a, b) => a + b,
-            '-': (a, b) => a - b,
-            '×': (a, b) => a * b
-        };
+document.addEventListener('DOMContentLoaded', function() {
+    const answerForm = document.getElementById('answer-form');
+    const answerInput = document.getElementById('answer-input');
+    const feedbackDiv = document.getElementById('feedback');
+    const num1Span = document.getElementById('num1');
+    const num2Span = document.getElementById('num2');
+    const operatorSpan = document.getElementById('operator');
+    const scoreSpan = document.getElementById('score');
+    const totalSpan = document.getElementById('total');
 
-        // DOM elements
-        this.problemEl = document.getElementById('problem');
-        this.answerEl = document.getElementById('answer');
-        this.submitBtn = document.getElementById('submit');
-        this.nextBtn = document.getElementById('next');
-        this.feedbackEl = document.getElementById('feedback');
-        this.scoreEl = document.getElementById('score');
-        this.attemptsEl = document.getElementById('attempts');
-
-        // Operation toggles
-        this.additionToggle = document.getElementById('addition');
-        this.subtractionToggle = document.getElementById('subtraction');
-        this.multiplicationToggle = document.getElementById('multiplication');
-
-        this.initializeEventListeners();
-        this.generateNewProblem();
+    function updateProblem(problem) {
+        num1Span.textContent = problem.num1;
+        num2Span.textContent = problem.num2;
+        operatorSpan.textContent = problem.operator;
     }
 
-    initializeEventListeners() {
-        this.submitBtn.addEventListener('click', () => this.checkAnswer());
-        this.nextBtn.addEventListener('click', () => this.generateNewProblem());
-        this.answerEl.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.checkAnswer();
+    function showFeedback(correct) {
+        feedbackDiv.className = `alert ${correct ? 'alert-success' : 'alert-danger'} feedback-animation`;
+        feedbackDiv.textContent = correct ? 'Correct! 🎉' : 'Try again! 💪';
+        feedbackDiv.classList.remove('d-none');
+        
+        setTimeout(() => {
+            feedbackDiv.classList.add('d-none');
+        }, 2000);
+    }
+
+    answerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const answer = answerInput.value;
+        
+        fetch('/check_answer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `answer=${encodeURIComponent(answer)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                feedbackDiv.className = 'alert alert-danger feedback-animation';
+                feedbackDiv.textContent = data.error;
+                feedbackDiv.classList.remove('d-none');
+            } else {
+                showFeedback(data.correct);
+                updateProblem(data.new_problem);
+                scoreSpan.textContent = data.score;
+                totalSpan.textContent = data.total;
+                answerInput.value = '';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            feedbackDiv.className = 'alert alert-danger feedback-animation';
+            feedbackDiv.textContent = 'An error occurred. Please try again.';
+            feedbackDiv.classList.remove('d-none');
         });
+    });
 
-        // Reset feedback when starting to type new answer
-        this.answerEl.addEventListener('input', () => {
-            this.feedbackEl.classList.add('d-none');
-        });
-    }
-
-    getRandomNumber() {
-        return Math.floor(Math.random() * 41) - 20; // -20 to 20
-    }
-
-    getRandomOperator() {
-        const availableOperators = [];
-        if (this.additionToggle.checked) availableOperators.push('+');
-        if (this.subtractionToggle.checked) availableOperators.push('-');
-        if (this.multiplicationToggle.checked) availableOperators.push('×');
-
-        if (availableOperators.length === 0) {
-            // If no operators selected, default to addition
-            this.additionToggle.checked = true;
-            return '+';
-        }
-
-        return availableOperators[Math.floor(Math.random() * availableOperators.length)];
-    }
-
-    generateNewProblem() {
-        const num1 = this.getRandomNumber();
-        const num2 = this.getRandomNumber();
-        const operator = this.getRandomOperator();
-
-        this.currentProblem = {
-            num1: num1,
-            num2: num2,
-            operator: operator,
-            answer: this.operators[operator](num1, num2)
-        };
-
-        // Format the problem display
-        this.problemEl.textContent = `${num1} ${operator} ${num2} = ?`;
-        this.answerEl.value = '';
-        this.answerEl.focus();
-        this.feedbackEl.classList.add('d-none');
-    }
-
-    checkAnswer() {
-        if (!this.currentProblem) return;
-
-        const userAnswer = parseInt(this.answerEl.value);
-        if (isNaN(userAnswer)) {
-            this.showFeedback('Please enter a valid number', 'warning');
-            return;
-        }
-
-        this.attempts++;
-        this.attemptsEl.textContent = this.attempts;
-
-        if (userAnswer === this.currentProblem.answer) {
-            this.score++;
-            this.scoreEl.textContent = this.score;
-            this.showFeedback('Correct! Well done!', 'success');
-            setTimeout(() => this.generateNewProblem(), 1500);
-        } else {
-            this.showFeedback(`Incorrect. Try again! The correct answer was ${this.currentProblem.answer}`, 'danger');
-        }
-    }
-
-    showFeedback(message, type) {
-        this.feedbackEl.textContent = message;
-        this.feedbackEl.className = `alert alert-${type}`;
-        this.feedbackEl.classList.remove('d-none');
-    }
-}
-
-// Initialize the application when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new MathPractice();
+    // Focus on input when page loads
+    answerInput.focus();
 });
