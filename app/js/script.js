@@ -2,9 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const getElt = document.getElementById.bind(document);
   const answerInput = getElt("user-answer");
   const answerInputFeedback = getElt("user-answer-feedback-symbol");
-  const feedbackDiv = getElt("feedback");
-  const feedbackMessage = getElt("feedback-message");
-  const dismissButton = getElt("dismiss-feedback");
   const num1Span = getElt("num1");
   const num2Span = getElt("num2");
   const operatorSpan = getElt("operator");
@@ -91,16 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
         answerInput.innerText += value;
       }
     });
-  });
-
-  dismissButton.addEventListener("click", function () {
-    feedbackDiv.classList.add("d-none");
-    // Clear the equals sign and answer spans
-    const problemContainer = num1Span.parentElement;
-    const existingAnswer = problemContainer.querySelector(".answer");
-    if (existingAnswer) existingAnswer.remove();
-    // Generate new problem
-    generateProblem();
   });
 
   // Initialize the first problem
