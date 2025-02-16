@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const scoreSpan = getElt("score");
   const totalSpan = getElt("total");
   const keypadButtons = document.querySelectorAll(".keypad-btn");
+  const correctAnswer = getElt("correct-answer-display");
 
   let score = 0;
   let total = 0;
@@ -46,27 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function showFeedback(correct) {
     answerInputFeedback.innerText = correct ? "Y" : "N";
     if (!correct) {
-      // Keep the original problem and add the correct answer
-      const problemContainer = num1Span.parentElement;
-
-      // Remove any existing answer display
-      const existingAnswer = problemContainer.querySelector(".answer");
-      if (existingAnswer) existingAnswer.remove();
-
-      // Add correct answer after the existing equals sign
-      const answerSpan = document.createElement("span");
-      answerSpan.className = "problem-number answer";
-      answerSpan.textContent = currentAnswer;
-      problemContainer.appendChild(answerSpan);
-
-      dismissButton.classList.remove("d-none");
-    } else {
-      dismissButton.classList.add("d-none");
-      // For correct answers, automatically generate new problem after brief delay
-      setTimeout(() => {
-        feedbackDiv.classList.add("d-none");
-        generateProblem();
-      }, 1500);
+      correctAnswer.innerText = `= ${currentAnswer}`;
     }
   }
 
