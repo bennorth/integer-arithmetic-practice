@@ -55,6 +55,10 @@ document.addEventListener("DOMContentLoaded", function () {
       score++;
     }
     total++;
+    refreshScoreDisplay();
+  }
+
+  function refreshScoreDisplay() {
     scoreSpan.textContent = score;
     totalSpan.textContent = total;
   }
