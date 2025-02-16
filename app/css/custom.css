@@ -49,6 +49,10 @@
   width: 8.5rem;
 }
 
+#reset-score {
+  font-size: 1.5rem;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 576px) {
   .problem-container {

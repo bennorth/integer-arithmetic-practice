@@ -22,12 +22,20 @@
             <div class="card-body">
               <div class="text-center mb-4">
                 <h2 class="card-title">Practise Signed Integers</h2>
-                <div class="score-display">
-                  <span class="badge bg-primary"
-                    >Score: <span id="score">0</span>/<span id="total"
-                      >0</span
-                    ></span
-                  >
+                <div class="container score-display">
+                  <div class="row">
+                    <div class="col-8 text-end">
+                      <span class="badge bg-primary"
+                        >Score: <span id="score">0</span> /
+                        <span id="total">0</span></span
+                      >
+                    </div>
+                    <div class="col-1 text-start">
+                      <button class="btn btn-outline-danger" id="reset-score">
+                        ⟲
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
