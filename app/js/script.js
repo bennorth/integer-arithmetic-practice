@@ -72,6 +72,20 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (value === "clear") {
         // Clear the input
         answerInput.innerText = "";
+      } else if (value === "ENTER") {
+        const userAnswer = parseInt(answerInput.innerText);
+        const answerCorrect = userAnswer === currentAnswer;
+        updateScore(answerCorrect);
+        showFeedback(answerCorrect);
+        button.innerText = "↦";
+        button.setAttribute("data-value", "NEXT");
+      } else if (value === "NEXT") {
+        button.setAttribute("data-value", "ENTER");
+        button.innerText = "⏎";
+        correctAnswer.innerText = "";
+        generateProblem();
+        answerInput.innerText = "";
+        answerInputFeedback.innerText = "";
       } else {
         // Add number or minus sign as a character
         answerInput.innerText += value;
