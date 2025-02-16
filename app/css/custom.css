@@ -1,81 +1,89 @@
 /* Problem display styling */
 .problem-container {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin: 2rem 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 2rem 0;
 }
 
 .problem-number {
-    padding: 0.5rem;
+  padding: 0.5rem;
 }
 
 .problem-operator {
-    padding: 0 1rem;
+  padding: 0 1rem;
 }
 
 /* Score display styling */
 .score-display {
-    font-size: 1.2rem;
-    margin: 1rem 0;
+  font-size: 1.2rem;
+  margin: 1rem 0;
 }
 
 /* Feedback animations */
 .feedback-animation {
-    animation: fadeInOut 2s ease-in-out;
+  animation: fadeInOut 2s ease-in-out;
 }
 
 @keyframes fadeInOut {
-    0% { opacity: 0; }
-    15% { opacity: 1; }
-    85% { opacity: 1; }
-    100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Numeric Keypad styling */
 .numeric-keypad {
-    max-width: 400px;
-    margin: 0 auto;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .keypad-row {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .keypad-btn {
-    width: 4rem;
-    height: 4rem;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border-radius: 0.5rem;
+  width: 4rem;
+  height: 4rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 0.5rem;
 }
 
 .keypad-btn.keypad-double-btn {
-    width: 8.5rem;
+  width: 8.5rem;
 }
 
 /* Mobile responsiveness */
 @media (max-width: 576px) {
-    .problem-container {
-        font-size: 2rem;
-    }
+  .problem-container {
+    font-size: 2rem;
+  }
 
-    .problem-operator {
-        padding: 0 0.5rem;
-    }
+  .problem-operator {
+    padding: 0 0.5rem;
+  }
 
-    .keypad-btn {
-        width: 3.5rem;
-        height: 3.5rem;
-        font-size: 1.25rem;
-    }
+  .keypad-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.25rem;
+  }
 
-    .keypad-btn.keypad-double-btn {
-        width: 7.5rem;
-    }
+  .keypad-btn.keypad-double-btn {
+    width: 7.5rem;
+  }
 }
