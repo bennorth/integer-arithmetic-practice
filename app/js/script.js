@@ -63,6 +63,17 @@ document.addEventListener("DOMContentLoaded", function () {
     totalSpan.textContent = total;
   }
 
+  function nextQuestion() {
+    const button = getElt("enter-or-next-button");
+    button.setAttribute("data-value", "ENTER");
+    button.innerText = "⏎";
+    correctAnswerEq.classList.add("d-none");
+    correctAnswer.innerText = "";
+    generateProblem();
+    answerInput.innerText = "";
+    answerInputFeedback.innerText = "";
+  }
+
   // Handle keypad input
   keypadButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -83,13 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.innerText = "↦";
         button.setAttribute("data-value", "NEXT");
       } else if (value === "NEXT") {
-        button.setAttribute("data-value", "ENTER");
-        button.innerText = "⏎";
-        correctAnswerEq.classList.add("d-none");
-        correctAnswer.innerText = "";
-        generateProblem();
-        answerInput.innerText = "";
-        answerInputFeedback.innerText = "";
+        nextQuestion();
       } else {
         // Add number or minus sign as a character
         answerInput.innerText += value;
