@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const scoreSpan = getElt("score");
   const totalSpan = getElt("total");
   const keypadButtons = document.querySelectorAll(".keypad-btn");
+  const correctAnswerEq = getElt("correct-answer-eq");
   const correctAnswer = getElt("correct-answer-display");
 
   let score = 0;
@@ -44,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function showFeedback(correct) {
     answerInputFeedback.innerText = correct ? "Y" : "N";
     if (!correct) {
-      correctAnswer.innerText = `= ${currentAnswer}`;
+      correctAnswerEq.classList.remove("d-none");
+      correctAnswer.innerText = currentAnswer;
     }
   }
 
@@ -79,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (value === "NEXT") {
         button.setAttribute("data-value", "ENTER");
         button.innerText = "⏎";
+        correctAnswerEq.classList.add("d-none");
         correctAnswer.innerText = "";
         generateProblem();
         answerInput.innerText = "";
