@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const answerForm = document.getElementById("answer-form");
   const answerInput = document.getElementById("answer-input");
   const feedbackDiv = document.getElementById("feedback");
   const feedbackMessage = document.getElementById("feedback-message");
@@ -104,24 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
         answerInput.value += value;
       }
     });
-  });
-
-  answerForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const userAnswer = parseInt(answerInput.value);
-    if (isNaN(userAnswer)) {
-      feedbackMessage.textContent = "Please enter a valid number";
-      feedbackDiv.className = "alert alert-danger";
-      feedbackDiv.classList.remove("d-none");
-      dismissButton.classList.add("d-none");
-      return;
-    }
-
-    const correct = userAnswer === currentAnswer;
-    showFeedback(correct);
-    updateScore(correct);
-    answerInput.value = "";
   });
 
   dismissButton.addEventListener("click", function () {
