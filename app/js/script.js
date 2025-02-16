@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const keypadButtons = document.querySelectorAll(".keypad-btn");
   const correctAnswerEq = getElt("correct-answer-eq");
   const correctAnswer = getElt("correct-answer-display");
+  const resetScore = getElt("reset-score");
 
   let score = 0;
   let total = 0;
@@ -62,6 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
     scoreSpan.textContent = score;
     totalSpan.textContent = total;
   }
+
+  resetScore.addEventListener("click", () => {
+    total = score = 0;
+    refreshScoreDisplay();
+    nextQuestion();
+  });
 
   function nextQuestion() {
     const button = getElt("enter-or-next-button");
