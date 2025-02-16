@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let score = 0;
   let total = 0;
   let currentAnswer = 0;
-  let currentProblem = { num1: 0, num2: 0, operator: "+" };
 
   function generateProblem() {
     const num1 = Math.floor(Math.random() * 41) - 20; // -20 to 20
@@ -30,9 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // multiplication
       answer = num1 * num2;
     }
-
-    // Store current problem
-    currentProblem = { num1, num2, operator };
 
     // Display problem
     displayProblem(num1, num2, operator);
