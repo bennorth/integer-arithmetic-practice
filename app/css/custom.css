@@ -20,26 +20,6 @@
   margin: 1rem 0;
 }
 
-/* Feedback animations */
-.feedback-animation {
-  animation: fadeInOut 2s ease-in-out;
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 /* Numeric Keypad styling */
 .numeric-keypad {
   max-width: 400px;
