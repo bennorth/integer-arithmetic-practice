@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const answerInput = document.getElementById("answer-input");
+  const answerInput = document.getElementById("user-answer");
   const feedbackDiv = document.getElementById("feedback");
   const feedbackMessage = document.getElementById("feedback-message");
   const dismissButton = document.getElementById("dismiss-feedback");
@@ -89,14 +89,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (value === "del") {
         // Handle backspace
-        const currentValue = answerInput.value;
-        answerInput.value = currentValue.slice(0, -1);
+        const currentValue = answerInput.innerText;
+        answerInput.innerText = currentValue.slice(0, -1);
       } else if (value === "clear") {
         // Clear the input
-        answerInput.value = "";
+        answerInput.innerText = "";
       } else {
         // Add number or minus sign as a character
-        answerInput.value += value;
+        answerInput.innerText += value;
       }
     });
   });
