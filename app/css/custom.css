@@ -65,6 +65,7 @@
 }
 
 .keypad-btn.keypad-double-btn {
+  font-size: 3rem;
   width: 8.5rem;
 }
 
