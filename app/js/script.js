@@ -100,8 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add number or minus sign as a character
                 answerInput.value += value;
             }
-
-            answerInput.focus();
         });
     });
 
@@ -121,10 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
         showFeedback(correct);
         updateScore(correct);
         answerInput.value = '';
-
-        if (correct) {
-            answerInput.focus();
-        }
     });
 
     dismissButton.addEventListener('click', function() {
@@ -135,11 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (existingAnswer) existingAnswer.remove();
         // Generate new problem
         generateProblem();
-        answerInput.focus();
     });
 
     // Initialize the first problem
     generateProblem();
-    // Focus on input when page loads
-    answerInput.focus();
 });
