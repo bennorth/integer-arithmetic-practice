@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const getElt = document.getElementById.bind(document);
   const answerInput = getElt("user-answer");
+  const answerInputFeedback = getElt("user-answer-feedback-symbol");
   const feedbackDiv = getElt("feedback");
   const feedbackMessage = getElt("feedback-message");
   const dismissButton = getElt("dismiss-feedback");
@@ -43,12 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showFeedback(correct) {
-    feedbackDiv.className = `alert ${
-      correct ? "alert-success" : "alert-danger"
-    }`;
-    feedbackMessage.textContent = correct ? "Correct! 🎉" : "Try again! 💪";
-    feedbackDiv.classList.remove("d-none");
-
+    answerInputFeedback.innerText = correct ? "Y" : "N";
     if (!correct) {
       // Keep the original problem and add the correct answer
       const problemContainer = num1Span.parentElement;
