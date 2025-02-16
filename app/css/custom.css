@@ -7,11 +7,11 @@
 }
 
 .problem-number {
-  padding: 0.5rem;
+  padding: 0.25rem;
 }
 
 .problem-operator {
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 }
 
 /* Score display styling */
@@ -76,7 +76,7 @@
   }
 
   .problem-operator {
-    padding: 0 0.5rem;
+    padding: 0 0.25rem;
   }
 
   .keypad-btn {
