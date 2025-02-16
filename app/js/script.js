@@ -1,13 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const answerInput = document.getElementById("user-answer");
-  const feedbackDiv = document.getElementById("feedback");
-  const feedbackMessage = document.getElementById("feedback-message");
-  const dismissButton = document.getElementById("dismiss-feedback");
-  const num1Span = document.getElementById("num1");
-  const num2Span = document.getElementById("num2");
-  const operatorSpan = document.getElementById("operator");
-  const scoreSpan = document.getElementById("score");
-  const totalSpan = document.getElementById("total");
+  const getElt = document.getElementById.bind(document);
+  const answerInput = getElt("user-answer");
+  const feedbackDiv = getElt("feedback");
+  const feedbackMessage = getElt("feedback-message");
+  const dismissButton = getElt("dismiss-feedback");
+  const num1Span = getElt("num1");
+  const num2Span = getElt("num2");
+  const operatorSpan = getElt("operator");
+  const scoreSpan = getElt("score");
+  const totalSpan = getElt("total");
   const keypadButtons = document.querySelectorAll(".keypad-btn");
 
   let score = 0;
