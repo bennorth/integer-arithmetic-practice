@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showFeedback(correct) {
-    answerInputFeedback.innerText = correct ? "Y" : "N";
+    answerInputFeedback.innerText = correct ? "✓" : "✗";
     if (!correct) {
       correctAnswerEq.classList.remove("d-none");
       correctAnswer.innerText = currentAnswer;
