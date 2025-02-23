@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let score = 0;
   let total = 0;
   let currentAnswer = 0;
+  let gameState = "booting";
 
   function generateProblem() {
     const num1 = Math.floor(Math.random() * 41) - 20; // -20 to 20
@@ -79,12 +80,15 @@ document.addEventListener("DOMContentLoaded", function () {
     generateProblem();
     answerInput.innerText = "";
     answerInputFeedback.innerText = "";
+    gameState = "awaiting-user-answer";
   }
 
   // Handle keypad input
   keypadButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const value = button.getAttribute("data-value");
+
+      if (gameState === "showing-feedback" && value !== "NEXT") return;
 
       if (value === "del") {
         // Handle backspace
@@ -100,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showFeedback(answerCorrect);
         button.innerText = "NEXT";
         button.setAttribute("data-value", "NEXT");
+        gameState = "showing-feedback";
       } else if (value === "NEXT") {
         nextQuestion();
       } else {
@@ -110,5 +115,5 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Initialize the first problem
-  generateProblem();
+  nextQuestion();
 });
