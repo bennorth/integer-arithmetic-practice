@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function nextQuestion() {
     const button = getElt("enter-or-next-button");
     button.setAttribute("data-value", "ENTER");
-    button.innerText = "⏎";
+    button.innerText = "ENTER";
     correctAnswerEq.classList.add("d-none");
     correctAnswer.innerText = "";
     generateProblem();
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const answerCorrect = userAnswer === currentAnswer;
         updateScore(answerCorrect);
         showFeedback(answerCorrect);
-        button.innerText = "↦";
+        button.innerText = "NEXT";
         button.setAttribute("data-value", "NEXT");
       } else if (value === "NEXT") {
         nextQuestion();
