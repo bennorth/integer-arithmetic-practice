@@ -18,10 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
   let gameState = "booting";
 
   function generateProblem() {
-    const num1 = Math.floor(Math.random() * 41) - 20; // -20 to 20
-    const num2 = Math.floor(Math.random() * 41) - 20; // -20 to 20
     const operators = ["+", "-", "×"];
     const operator = operators[Math.floor(Math.random() * operators.length)];
+
+    const maxMagnitude = operator === "×" ? 10 : 20;
+    const operandRange = 2 * maxMagnitude + 1;
+    const num1 = Math.floor(Math.random() * operandRange) - maxMagnitude;
+    const num2 = Math.floor(Math.random() * operandRange) - maxMagnitude;
 
     let answer;
     if (operator === "+") {
