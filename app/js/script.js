@@ -17,11 +17,14 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentAnswer = 0;
   let gameState = "booting";
 
+  let addMaxOperand = 20;
+  let mulMaxOperand = 10;
+
   function generateProblem() {
     const operators = ["+", "-", "×"];
     const operator = operators[Math.floor(Math.random() * operators.length)];
 
-    const maxMagnitude = operator === "×" ? 10 : 20;
+    const maxMagnitude = operator === "×" ? mulMaxOperand : addMaxOperand;
     const operandRange = 2 * maxMagnitude + 1;
     const num1 = Math.floor(Math.random() * operandRange) - maxMagnitude;
     const num2 = Math.floor(Math.random() * operandRange) - maxMagnitude;
