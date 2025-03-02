@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentAnswer = 0;
   let gameState = "booting";
 
-  let addMaxOperand = 20;
-  let mulMaxOperand = 10;
+  let addMaxOperand = 10;
+  let mulMaxOperand = 5;
 
   let settingsShown = false;
 
