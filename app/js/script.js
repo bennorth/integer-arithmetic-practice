@@ -131,4 +131,26 @@ document.addEventListener("DOMContentLoaded", function () {
     if (settingsShown) settingsSection.classList.add("shown");
     else settingsSection.classList.remove("shown");
   });
+
+  const difficultyButtons = [
+    { id: "settings-easy", addMaxOp: 10, mulMaxOp: 5 },
+    { id: "settings-med", addMaxOp: 15, mulMaxOp: 8 },
+    { id: "settings-hard", addMaxOp: 20, mulMaxOp: 10 },
+  ];
+
+  function configureDifficultyButton(cfg) {
+    const thisBtn = getElt(cfg.id);
+    thisBtn.addEventListener("click", () => {
+      difficultyButtons.forEach((cfg1) => {
+        const btn = getElt(cfg1.id);
+        btn.classList.remove("btn-success");
+        btn.classList.add("btn-outline-secondary");
+      });
+      thisBtn.classList.add("btn-success");
+      addMaxOperand = cfg.addMaxOp;
+      mulMaxOperand = cfg.mulMaxOp;
+    });
+  }
+
+  difficultyButtons.forEach(configureDifficultyButton);
 });
