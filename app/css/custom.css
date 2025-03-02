@@ -85,3 +85,10 @@
     width: 7.5rem;
   }
 }
+
+#settings-section {
+  display: none;
+}
+#settings-section.shown {
+  display: block;
+}

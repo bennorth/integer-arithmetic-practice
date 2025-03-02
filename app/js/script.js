@@ -20,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let addMaxOperand = 20;
   let mulMaxOperand = 10;
 
+  let settingsShown = false;
+
   function generateProblem() {
     const operators = ["+", "-", "×"];
     const operator = operators[Math.floor(Math.random() * operators.length)];
@@ -122,4 +124,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize the first problem
   nextQuestion();
+
+  const settingsSection = getElt("settings-section");
+  getElt("toggle-settings").addEventListener("click", () => {
+    settingsShown = !settingsShown;
+    if (settingsShown) settingsSection.classList.add("shown");
+    else settingsSection.classList.remove("shown");
+  });
 });
