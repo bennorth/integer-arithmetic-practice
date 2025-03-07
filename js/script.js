@@ -116,8 +116,11 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (value === "NEXT") {
         nextQuestion();
       } else {
-        // Add number or minus sign as a character
-        answerInput.innerText += value;
+        // Add number or minus sign as a character, as long as
+        // that would not make input too long.
+        if (answerInput.innerText.length < 6) {
+          answerInput.innerText += value;
+        }
       }
     });
   });
